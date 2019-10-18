@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
-import AppContext from './Context/App'
+import { ContextProvider } from './Context'
 import theme from './Styles/light'
 
 import { Page } from './Components/UI'
@@ -12,7 +12,7 @@ import Favs from './Containers/Pages/Favs'
 
 const App = () =>(
   <Router>
-    <AppContext>
+    <ContextProvider>
       <ThemeProvider theme={theme}>
         <Page color="navy" bg="white">
           <Navbar />
@@ -22,7 +22,7 @@ const App = () =>(
           </Switch>
         </Page>
       </ThemeProvider>
-    </AppContext>
+    </ContextProvider>
   </Router>
 )
 

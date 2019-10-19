@@ -28,7 +28,11 @@ const Home = () => {
         }
       }}
     />,
-    <Pictures key="pictureslist" list={state.pictures} />
+    <Pictures
+      key="pictureslist"
+      list={state.pictures}
+      ifEmpty="Loading, but if it never loads I'd check my internet connection"
+    />
 ])}
 
 export default Home

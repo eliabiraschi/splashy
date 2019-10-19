@@ -10,15 +10,17 @@ import {
 } from '../Services/Favs'
 import {
   Container,
+  Text,
 } from '../Components/UI'
 import Picture, { PicturePropTypes } from '../Components/Picture'
 
-const Pictures = ({ list, onChange }) => {
+const Pictures = ({ list, onChange, ifEmpty }) => {
   const [ favsIds, setFavsIds ] = useState(getFavsIdsOnly())
   return (
     <Container>
       {
-        list.map(data => (
+        list.length > 0
+        ? list.map(data => (
           <Picture
             key={data.id}
             data={data}
@@ -32,7 +34,13 @@ const Pictures = ({ list, onChange }) => {
             }}
           />
         ))
-      }
+      : (<Text
+          color="accent"
+          mt="5rem"
+        >
+          {ifEmpty}
+        </Text>
+      )}
     </Container>
   )
 }
@@ -40,11 +48,13 @@ const Pictures = ({ list, onChange }) => {
 Picture.propTypes = {
   list: PropTypes.arrayOf(PicturePropTypes),
   onChange: PropTypes.func,
+  ifEmpty: PropTypes.string,
 }
 
 Pictures.defaultProps = {
   list: [],
   onChange: () => {},
+  ifEmpty: 'There are no pictures here.',
 }
 
 export default Pictures

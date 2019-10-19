@@ -16,6 +16,7 @@ const Favs = () => {
     ? (<SlideShow list={pictures} />)
     : (<Pictures
       list={pictures}
+      ifEmpty="You have no favourites - Go and search for some!"
       onChange={() => {
         setPictures(getFavs())
       }}

@@ -42,22 +42,31 @@ const Navbar = withRouter(({ location, history }) => {
         flexWrap: 'wrap',
       }}
     >
-      <LinkButton
-        color="accent"
-        onClick={() => {
-          if (!isHome) {
-            history.push('/')
-          }
+      <Box>
+        <LinkButton
+          color="accent"
+          onClick={() => {
+            if (!isHome) {
+              history.push('/')
+            }
+          }}
+        >
+          <h1>Splashy</h1>
+        </LinkButton>
+        <Text color="accent" ml="0.3rem">discover new pictures</Text>
+      </Box>
+      <Box
+        style={{
+          display: 'flex',
+          flexGrow: 1,
+          alignItems: 'center',
+          justifyContent: 'flex-end',
         }}
       >
-        <h1>Splashy</h1>
-      </LinkButton>
-      <Text color="accent">{ isHome ? 'discover new pictures' : 'manage your favourites' }</Text>
-      <Box>
         <LinkButton
           mr="2rem"
           onClick={()=>{
-            dispatch({ type: TOGGLE_SLIDESHOW })
+            dispatch({ type: TOGGLE_SLIDESHOW, selectedPic: null })
           }}
           title="Start slide show"
         >

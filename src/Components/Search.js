@@ -29,9 +29,9 @@ const Search = ({ defaultValue, onChange, onSearch }) => {
         py="0.3rem"
         px="1rem"
         mr="0.5rem"
-        width="24rem"
         bg="black"
         color="accent"
+        width={[1, 2/3, 2/4, 1/3 ]}
         value={value}
         onChange={ event => {
           setValue(event.target.value)

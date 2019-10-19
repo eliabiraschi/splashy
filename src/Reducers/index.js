@@ -11,7 +11,11 @@ const reducer = (state, action) => {
     case actions.TOGGLE_THEME:
       return { ...state, theme: action.theme }
     case actions.TOGGLE_SLIDESHOW:
-      return { ...state, slideShow: !state.slideShow }
+      return {
+        ...state,
+        slideShow: !state.slideShow,
+        singlePictureFullscreen: action.selectedPic
+      }
     default:
       return state
   }

@@ -5,6 +5,7 @@
 import React, { useState, useContext } from 'react'
 import { getFavs } from '../../Services/Favs'
 import { Context } from '../../Context'
+import { Text } from '../../Components/UI'
 import Pictures from '../Pictures'
 import SlideShow from '../SlideShow'
 
@@ -14,13 +15,25 @@ const Favs = () => {
   return(
     state.slideShow
     ? (<SlideShow list={pictures} />)
-    : (<Pictures
-      list={pictures}
-      ifEmpty="You have no favourites - Go and search for some!"
-      onChange={() => {
-        setPictures(getFavs())
-      }}
-    />)
+    : ([
+      <Text
+        key="title"
+        color="accent"
+        m="2.2rem"
+        style={{
+          fontSize: '2.2rem',
+          fontWeight: 'bold',
+        }}
+      >Favourites</Text>,
+      <Pictures
+        key="picturescontainer"
+        list={pictures}
+        ifEmpty="You have no favourites - Go and search for some!"
+        onChange={() => {
+          setPictures(getFavs())
+        }}
+      />
+    ])
   )
 }
 

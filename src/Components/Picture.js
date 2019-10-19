@@ -1,8 +1,10 @@
 /**
  * Template for the pictures
  */
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
+import { Context } from '../Context'
+import { TOGGLE_SLIDESHOW } from '../Reducers/actions'
 import {
   Box,
   Image,
@@ -11,11 +13,21 @@ import {
 } from './UI'
 
 const Picture = ({ data, onHeartClick, isFav }) => {
+  const { dispatch } = useContext(Context)
   const iconClass = isFav ? 'heart' : 'heartAlt'
   const toolTipText = isFav ? 'remove from favs' : 'add to favs'
   return (
     <Box m="1rem">
-      <Image src={data.urls.regular} alt={data.alt_description} />
+      <LinkButton
+        onClick={()=>{
+          dispatch({
+            type: TOGGLE_SLIDESHOW,
+            selectedPic: data,
+          })
+        }}
+      >
+        <Image src={data.urls.regular} alt={data.alt_description} />
+      </LinkButton>
       <LinkButton
         m="0.5rem"
         onClick={onHeartClick}
@@ -23,6 +35,7 @@ const Picture = ({ data, onHeartClick, isFav }) => {
           position: 'absolute',
           bottom: 0,
           right: 0,
+          zIndex: 2,
         }}
       >
         <Icon title={toolTipText} name={iconClass} color="accent" style={{ fontSize: '1.6rem' }} />

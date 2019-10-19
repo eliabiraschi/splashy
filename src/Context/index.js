@@ -6,6 +6,7 @@ const initialState = {
   pictures: [],
   theme: 'light',
   slideShow: false,
+  singlePictureFullscreen: null,
 }
 /**
  * The Context will be included from the components that will need to access the context

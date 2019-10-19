@@ -15,25 +15,40 @@ import { Context } from '../Context'
 import { TOGGLE_SLIDESHOW } from '../Reducers/actions'
 
 const SlideShow = ({list, timeInterval}) => {
-  const { dispatch } = useContext(Context)
+  const { state, dispatch } = useContext(Context)
   const [ currentPicIndex, setCurrentPicIndex ] = useState(0)
+  
   const handleEscKey = (event) => {
     if(event.keyCode === 27) {
-      dispatch({ type: TOGGLE_SLIDESHOW })
+      dispatch({ type: TOGGLE_SLIDESHOW, selectedPic: null })
     }
   }
+
+  console.log(state.singlePictureFullscreen)
+  if (state.singlePictureFullscreen) {
+    list = [state.singlePictureFullscreen]
+  }
+  
   useEffect(() => {
-    document.addEventListener('keydown', handleEscKey, false);
-    const interval = setInterval(() => {
-      const next = currentPicIndex === list.length - 1 ? 0 : currentPicIndex + 1
-      setCurrentPicIndex(next)
-    }, timeInterval)
-    return () => {
-      clearInterval(interval)
-      document.removeEventListener('keydown', handleEscKey, false);
+    if (list.length === 0) {
+      dispatch({ type: TOGGLE_SLIDESHOW })
+    } else {
+      document.addEventListener('keydown', handleEscKey, false);
+      let interval;
+      if (list.length > 1) {
+        interval = setInterval(() => {
+          const next = currentPicIndex === list.length - 1 ? 0 : currentPicIndex + 1
+          setCurrentPicIndex(next)
+        }, timeInterval)
+      }
+      return () => {
+        clearInterval(interval)
+        document.removeEventListener('keydown', handleEscKey, false);
+      }
     }
   });
-  return (
+
+  return (list.length > 0 &&
     <Box
       p="3rem"
       style={{
@@ -47,7 +62,7 @@ const SlideShow = ({list, timeInterval}) => {
     >
       <LinkButton
         onClick={() => {
-          dispatch({ type: TOGGLE_SLIDESHOW })
+          dispatch({ type: TOGGLE_SLIDESHOW, selectedPic: null })
         }}
         style={{
           zIndex: '101'

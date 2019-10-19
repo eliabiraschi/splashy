@@ -24,7 +24,6 @@ const SlideShow = ({list, timeInterval}) => {
     }
   }
 
-  console.log(state.singlePictureFullscreen)
   if (state.singlePictureFullscreen) {
     list = [state.singlePictureFullscreen]
   }

@@ -37,32 +37,32 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Notes on the Code
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Fetching data
+At the moment there is no caching implemented on the data collected from the Unsplash API.
+The pictures live in the global store under the key `pictures`. Each time a search is performed the results will be stored on the same key of the store and the previous data lost. Each time the use navigates to the home page, a new request for the latest pictures is made.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Data model
+Each picture got from the api is represented like the below example. The same object is used to store the favourites in the local storage. In the comments in the code we refer to this structure as the "picture object". It does not find a parallel in the propTypes definitions since only few fields are used. However, it is kept in it's full form for future developments.
+```json
+{
+  alt_description: "two Honest Beauty mascaras on table",
+  categories: [],
+  color: "#110D0D",
+  created_at: "2019-07-11T19:21:05-04:00",
+  current_user_collections: [],
+  description: null,
+  height: 2700,
+  id: "iXFelifXseA",
+  liked_by_user: false,
+  likes: 110,
+  links: {self: "https://api.unsplash.com/photos/iXFelifXseA", html: "https://unsplash.com/photos/iXFelifXseA", download: "https://unsplash.com/photos/iXFelifXseA/download", download_location: "https://api.unsplash.com/photos/iXFelifXseA/download"},
+  promoted_at: null,
+  sponsorship: {impressions_id: "5209903", tagline: "Clean beauty that works.", sponsor: {…}},
+  updated_at: "2019-10-14T01:03:23-04:00",
+  urls: {raw: "https://images.unsplash.com/photo-1562887245-138c2f45013e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjk2NzI2fQ", full: "https://images.unsplash.com/photo-1562887245-138c2…&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjk2NzI2fQ", regular: "https://images.unsplash.com/photo-1562887245-138c2…nysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjk2NzI2fQ", small: "https://images.unsplash.com/photo-1562887245-138c2…inysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjk2NzI2fQ", thumb: "https://images.unsplash.com/photo-1562887245-138c2…inysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjk2NzI2fQ"},
+  user: {id: "o9M2-GtNlBE", updated_at: "2019-10-18T10:58:11-04:00", username: "honest", name: "The Honest Company", first_name: "The Honest Company", …},
+  width: 2700,
+}
+```

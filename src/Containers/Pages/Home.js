@@ -1,32 +1,34 @@
+/**
+ * Home component, beside displaying the search and the pictures, takes care of
+ * handling the fetching of the pictures in the first place and on every search.
+ */
 import React, { useContext, useEffect } from 'react'
 import { Context } from '../../Context'
-
-import { getLatest/* , searchByKeywords */ } from '../../Services/Unsplash'
+import { getLatest, searchByKeywords } from '../../Services/Unsplash'
 import { UPDATE_PICTURES } from '../../Reducers/actions'
-
-import {
-  Container,
-  Box,
-  Image,
-} from '../../Components/UI'
+import Search from '../../Components/Search'
+import Pictures from '../Pictures'
+import SlideShow from '../SlideShow'
 
 const Home = () => {
-  const { state, dispatch } = useContext(Context);
-  console.log(state.pictures)
+  const { state, dispatch } = useContext(Context)
   useEffect(() => {
-    getLatest() //searchByKeywords('ferret')
+    getLatest()
       .then(data => dispatch({ type: UPDATE_PICTURES, data }))
   }, [dispatch])
   return (
-    <Container>
-      {
-        state.pictures.map(({ id, urls, alt_description }) => (
-          <Box key={id} p="1rem">
-            <Image m="1rem" src={urls.regular} alt={alt_description} />
-          </Box>
-        ))
-      }
-    </Container>
-)}
+    state.slideShow ? (<SlideShow list={state.pictures} />)
+    : [
+    <Search
+      key="searchBox"
+      onSearch={(searchQuery)=>{
+        if(searchQuery.length > 0) {
+          searchByKeywords(searchQuery)
+            .then(data => dispatch({ type: UPDATE_PICTURES, data }))
+        }
+      }}
+    />,
+    <Pictures key="pictureslist" list={state.pictures} />
+])}
 
 export default Home

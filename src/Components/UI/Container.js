@@ -6,6 +6,7 @@ const Container = styled.div`
   flex-direction: row;
   align-items: flex-start;
   flex-wrap: wrap;
+  justify-content: center;
   ${color}
   ${space}
   ${layout}

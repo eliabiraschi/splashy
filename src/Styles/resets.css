@@ -1,4 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
+
+
+/*
+Resetting all the elements to have no margin and a border-box size for better styling.
+Applying the same font to all the elements
+*/
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: 'Roboto Slab', serif;
 }

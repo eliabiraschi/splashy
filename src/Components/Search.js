@@ -45,6 +45,7 @@ const Search = ({ defaultValue, onChange, onSearch }) => {
       />
       <LinkButton
         onClick={() => onSearch(value)}
+        title="search"
       >
         <Icon name="search" color="accent" style={{ fontSize: '1.6rem' }} />
       </LinkButton>

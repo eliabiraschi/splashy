@@ -68,7 +68,7 @@ const Navbar = withRouter(({ location, history }) => {
           onClick={()=>{
             dispatch({ type: TOGGLE_SLIDESHOW, selectedPic: null })
           }}
-          title="Start slide show"
+          title="slide show"
         >
           <Icon name="play" color="accent" style={{ fontSize: '1.6rem' }} />
         </LinkButton>
@@ -77,7 +77,7 @@ const Navbar = withRouter(({ location, history }) => {
           style={{
             marginRight: '2rem',
           }}
-          title={isHome ? 'Favourites' : 'Discover'}
+          title={isHome ? 'favourites' : 'discover'}
         >
           <Icon name={pageIcon} color="accent" style={{ fontSize: '1.6rem' }} />
         </Link>

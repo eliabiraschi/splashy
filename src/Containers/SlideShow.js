@@ -67,6 +67,7 @@ const SlideShow = ({list, timeInterval}) => {
         style={{
           zIndex: '101'
         }}
+        title="close"
       >
         <Icon
           color="accent"
